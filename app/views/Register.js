@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import Form from './common/Form'
 
-import {registerRequest} from '../controller'
+import {registerUser} from '../controller'
 
 class Register extends Component {
   constructor (props) {
@@ -28,7 +28,7 @@ class Register extends Component {
   }
 
   register (username, password) {
-    this.props.dispatch(registerRequest({username, password}))
+    this.props.dispatch(registerUser({username, password}))
   }
 }
 

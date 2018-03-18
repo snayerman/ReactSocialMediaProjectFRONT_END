@@ -13,7 +13,6 @@ class newsFeed extends Component {
 
   handleNewPost (post) {
     this.props.dispatch(addNewsfeed({post}))
-      // posts: this.state.posts.concat([post])
   }
   render () {
     const post = this.props.posts.map((post, index) =>
@@ -30,8 +29,6 @@ class newsFeed extends Component {
 }
 
 newsFeed.propTypes = {
-  // data: React.PropTypes.object,
-  // history: React.PropTypes.object,
   dispatch: React.PropTypes.func
 }
 

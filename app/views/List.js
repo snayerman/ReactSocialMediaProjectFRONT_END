@@ -12,8 +12,6 @@ class List extends Component {
               authorLink
             }
           }
-          // return <li className="list-group-item" data-category={item} key={item}>{item}</li>
-          // <Link to={'/ideas/'+this.props.testvalue }>Create Idea</Link>
 
           return <li className='list-group-item'>
             <Link to={newTo}>
@@ -27,7 +25,3 @@ class List extends Component {
 }
 
 export default List
-
-// const newTo = { pathname: "/article/595212758daa6810cbba4104", param1: "Par1" };
-
-// <Link to={newTo}> </Link>
