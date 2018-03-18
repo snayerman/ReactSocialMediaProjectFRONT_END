@@ -1,0 +1,41 @@
+$wrapper-padding: 16px;
+
+.wrapper {
+	margin: 0 auto;
+	display: flex;
+	height: 100%;
+	padding: 0 $wrapper-padding;
+	width: 100%;
+}
+
+.main {
+	margin: auto;
+    width: 60%;
+    padding: 10px;
+		height: 100%
+}
+
+#app {
+	height: 100%;
+}
+
+.text-section {
+	margin: 3em auto;
+}
+
+.lefty {
+	width: 70%;
+	float:left;
+}
+
+.righty {
+	width: 30%;
+	float:right;
+}
+
+.newsFeed {
+	  clear: both;
+    vertical-align: bottom;
+    width: 100%;
+		text-align: center;
+}
