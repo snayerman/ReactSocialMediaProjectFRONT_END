@@ -15,13 +15,14 @@ class Nav extends Component {
     const navButtons = this.props.loggedIn
       ? (
         <div>
-          <Link to='/dashboard' className='btn btn--dash btn--nav'>Profile</Link>
-          <Link to='/settings' className='btn btn--login btn--nav' onClick={this._clearError}>Settings</Link>
-          {this.props.currentlySending
-            ? (<LoadingButton className='btn--nav' />)
-            : (
-              <a href='#' className='btn btn--login btn--nav' onClick={this._logout}>Logout</a>
-            )}
+         <Link to='/dashboard' className='btn btn--dash btn--nav'>Profile</Link>
+         <Link to='/settings' className='btn btn--login btn--nav' onClick={this._clearError}>Settings</Link>
+         {/* {this.props.currentlySending
+         ? (<LoadingButton className='btn--nav' />)
+         : (
+            <a href='#' className='btn btn--login btn--nav' onClick={this._logout}>Logout</a>
+         )} */}
+         <a href='#' className='btn btn--login btn--nav' onClick={this._logout}>Logout</a>
         </div>
       )
       : (

@@ -15,17 +15,19 @@ import {
   ADD_FRIEND,
   DELETE_FRIEND,
   CHANGE_NAME,
-  CHANGE_PASSWORD
+  CHANGE_PASSWORD,
+  REGISTER_USER
 } from './constants'
 
 export function registerUser (data) {
-   axios.post('/signup', data)
-  .then(function (response) {
-    console.log(response);
-  })
-  .catch(function (error) {
-    console.log(error);
-  });
+   let user = {userName: data.username, password: data.password};
+   axios.post('http://localhost:3001/signup', user).then(res => {
+      console.log("Singup", res);
+   }).catch(err => {
+      console.log(err, user);
+   })
+
+   return {type: REGISTER_USER, data};
 }
 
 export function changeForm (newFormState) {
@@ -41,7 +43,17 @@ export function sendingRequest (sending) {
 }
 
 export function loginRequest (data) {
-  return {type: LOGIN_REQUEST, data}
+   console.log("LOGGING IN!!!");
+   let user = {userName: data.username, password: data.password};
+
+   axios.post('http://localhost:3001/login', user).then(res => {
+      localStorage.setItem("token", res.data.token);
+      console.log("Logged in!");
+   }).catch(err => {
+      console.log("Login err!", err);
+   });
+
+   return {type: LOGIN_REQUEST, data}
 }
 
 export function addNewsfeed (text) {

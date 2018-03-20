@@ -14,7 +14,22 @@ class Login extends Component {
     const {dispatch} = this.props
     const {formState, currentlySending, error} = this.props.data
 
-    return (
+    return this.props.data.loggedIn ? (
+      <div>
+         {console.log(this)}
+         {this.props.history.push('/')}
+      </div>
+    ) : (
+      <div className='form-page__wrapper'>
+         <div className='form-page__form-wrapper'>
+         <div className='form-page__form-header'>
+            <h2 className='form-page__form-heading'>Login</h2>
+         </div>
+         <Form data={formState} dispatch={dispatch} history={this.props.history} onSubmit={this._login} btnText={'Login'} error={error} currentlySending={currentlySending} />
+         </div>
+      </div>
+    )
+    /* return (
       <div className='form-page__wrapper'>
         <div className='form-page__form-wrapper'>
           <div className='form-page__form-header'>
@@ -23,7 +38,7 @@ class Login extends Component {
           <Form data={formState} dispatch={dispatch} history={this.props.history} onSubmit={this._login} btnText={'Login'} error={error} currentlySending={currentlySending} />
         </div>
       </div>
-    )
+    ) */
   }
 
   _login (username, password) {

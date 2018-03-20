@@ -13,20 +13,24 @@ import {
   REGISTER_REQUEST,
   CLEAR_ERROR,
   CHANGE_NAME,
-  CHANGE_PASSWORD
+  CHANGE_PASSWORD,
+  REGISTER_USER,
+  LOGIN_REQUEST,
+  LOGOUT
 } from '../controller/constants'
 import auth from '../auth'
 
 // The initial application state
 let initialState = {
-  name: 'Yeng Tan',
+  name: '',
   formState: {
     username: '',
     password: ''
   },
   error: '',
   currentlySending: false,
-  loggedIn: auth.loggedIn(),
+//   loggedIn: auth.loggedIn(),
+  loggedIn: localStorage.getItem("token") !== null,
   posts: [],
   categories: [
     'Personal',
@@ -35,11 +39,7 @@ let initialState = {
     'Sport'
   ],
   ListOfFriends: [
-    'Timeline',
-    'Costin Pirvu',
-    'Alex Boyd',
-    'Jessie Smith',
-    'Alli Dinapoli'
+    'Timeline'
   ],
   ListOfPeople: [
     'Costin Pirvu',
@@ -60,7 +60,19 @@ function reducer (state = initialState, action) {
         ...state,
         formState: action.newFormState
       }
-    case SET_AUTH:
+   case LOGIN_REQUEST:
+      return {
+         ...state,
+         formState: action.data,
+         loggedIn: true
+      }
+   case LOGOUT:
+      localStorage.removeItem("token");
+      return {
+         ...state,
+         loggedIn: false
+      }
+   case SET_AUTH:
       return {
         ...state,
         loggedIn: action.newAuthState

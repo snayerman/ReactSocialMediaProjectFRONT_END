@@ -2,7 +2,7 @@ import 'babel-polyfill'
 
 import React, {Component} from 'react'
 import ReactDOM from 'react-dom'
-import {Router, Route, browserHistory} from 'react-router'
+import {Router, Route, browserHistory, Redirect} from 'react-router'
 import {createStore, applyMiddleware} from 'redux'
 import createSagaMiddleware from 'redux-saga'
 import {Provider} from 'react-redux'
@@ -27,12 +27,12 @@ const logger = createLogger({
   predicate: (getState, action) => action.type !== 'CHANGE_FORM'
 })
 
-const sagaMiddleware = createSagaMiddleware()
+// const sagaMiddleware = createSagaMiddleware()
 
-const store = createStore(model, applyMiddleware(logger, sagaMiddleware))
-sagaMiddleware.run(rootSaga)
+const store = createStore(model, applyMiddleware(logger/* , sagaMiddleware */))
+// sagaMiddleware.run(rootSaga)
 
-function checkAuth (nextState, replace) {
+/* function checkAuth (nextState, replace) {
   const {loggedIn} = store.getState()
 
   store.dispatch(clearError())
@@ -54,28 +54,35 @@ function checkAuth (nextState, replace) {
       }
     }
   }
-}
+} */
 
 class LoginFlow extends Component {
-  render () {
-    return (
-      <Provider store={store}>
-        <Router history={browserHistory}>
-          <Route component={App}>
-            <Route path='/' component={Home} />
-            <Route onEnter={checkAuth}>
-              <Route path='/login' component={Login} />
-              <Route path='/register' component={Register} />
-              <Route path='/dashboard' component={Dashboard} />
-              <Route path='/settings' component={Settings} />
-              <Route path='/friends' component={FriendProfile} />
-            </Route>
-            <Route path='*' component={NotFound} />
-          </Route>
-        </Router>
-      </Provider>
-    )
-  }
+
+   isLoggedIn() {
+      console.log("Is logged in?", localStorage.getItem("token") !== null);
+      return localStorage.getItem("token") !== null;
+   }
+
+   render () {
+      console.log("Props", this);
+      return (
+         <Provider store={store}>
+            <Router history={browserHistory}>
+               <Route component={App}>
+                  <Route exact path='/' component={Home} />
+                  {/* <Route onEnter={checkAuth}> */}
+                  <Route path='/login' component={Login} />
+                  <Route path='/register' component={Register} />
+                  <Route path='/dashboard' component={Dashboard} />
+                  <Route path='/settings' component={Settings} />
+                  <Route path='/friends' component={FriendProfile} />
+                  </Route>
+                  <Route path='*' component={NotFound} />
+               {/* </Route> */}
+            </Router>
+         </Provider>
+      )
+   }
 }
 
 ReactDOM.render(<LoginFlow />, document.getElementById('app'))
