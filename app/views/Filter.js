@@ -10,6 +10,7 @@ class Filter extends Component {
   }
 
   handleChange (event) {
+     console.log("SDFASDFASDFSDASDFASDF");
     this.setState({value: event.target.value})
   }
 

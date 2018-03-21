@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import Form from './common/Form'
+import axios from 'axios';
 
 import {loginRequest} from '../controller'
 
@@ -14,9 +15,9 @@ class Login extends Component {
     const {dispatch} = this.props
     const {formState, currentlySending, error} = this.props.data
 
+    console.log(this.props);
     return this.props.data.loggedIn ? (
       <div>
-         {console.log(this)}
          {this.props.history.push('/')}
       </div>
     ) : (
@@ -41,9 +42,18 @@ class Login extends Component {
     ) */
   }
 
-  _login (username, password) {
-    this.props.dispatch(loginRequest({username, password}))
-  }
+   _login (username, password) {
+      let user = {userName: username, password: password};
+      // console.log("USER: ", user);
+
+      axios.post('http://localhost:3001/login', user).then(res => {
+         localStorage.setItem("token", res.data.token);
+         console.log("Logged in!", res);
+         this.props.dispatch(loginRequest({username, password}))
+      }).catch(err => {
+         console.log("Login err!", err);
+      });
+   }
 }
 
 Login.propTypes = {

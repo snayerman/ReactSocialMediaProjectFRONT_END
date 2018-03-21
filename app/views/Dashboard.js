@@ -3,6 +3,9 @@ import Search from './Search'
 import Feed from './Feed'
 import ImageUpload from './ImageUpload'
 import {connect} from 'react-redux'
+import axios from 'axios';
+
+import {getSelf, getAllUsers} from '../controller/index';
 
 class Dashboard extends Component {
   constructor (props) {
@@ -11,29 +14,79 @@ class Dashboard extends Component {
       name: this.props.name
     }
   }
-  render () {
-    return (
-      <div className='main'>
 
-        <div className='lefty'>
-          <h1>Welcome back! {this.state.name}</h1>
-          <ImageUpload />
-        </div>
+   componentDidMount() {      
+      if(localStorage.getItem("token") !== null) {
+         var authOptions = {
+            method: 'GET',
+            url: 'http://localhost:3001/me',
+            headers: {
+               'x-access-token': ''+localStorage.getItem("token"),
+               'Content-Type': 'application/json'
+            }
+         };
 
-        <div className='righty'>
-          <Search />
-        </div>
+         axios(authOptions)
+            .then(res => {
+               console.log("Getting self", res);
+               let ret = {
+                  friends: res.data.friends,
+                  userName: res.data.userName
+               }
 
-        <div className='newsFeed'>
-          <br />
-          <h1>Facebook Wall</h1>
-          <hr />
-          <Feed author='Yeng Tan' />
-        </div>
+               authOptions.url = 'http://localhost:3001/post';
+               axios(authOptions)
+                  .then(res => {
+                     ret.posts = res.data.posts;
+                     this.props.dispatch(getSelf(ret));
+                  }).catch(err => {
+                     console.log(err);
+                  })
+               
+            })
+            .catch(err => {
+               console.log(err);
+            })
+         
+         authOptions.url = 'http://localhost:3001/users';
 
-      </div>
-    )
-  }
+         axios(authOptions)
+            .then(res => {
+               console.log("Getting all users", res.data);
+               this.props.dispatch(getAllUsers(res.data));
+            })
+            .catch(err => {
+               console.log(err);
+            })
+      }
+   }
+
+   render () {
+      if(localStorage.getItem("token") === null)
+         this.props.history.push('/login');
+
+      return (
+         <div className='main'>
+
+         <div className='lefty'>
+            <h1>Welcome back! {this.state.name}</h1>
+            <ImageUpload />
+         </div>
+
+         <div className='righty'>
+            <Search />
+         </div>
+
+         <div className='newsFeed'>
+            <br />
+            <h1>Facebook Wall</h1>
+            <hr />
+            <Feed author={this.props.name} />
+         </div>
+
+         </div>
+      )
+   }
 }
 
 const mapStateToProps = state => ({name: state.name})

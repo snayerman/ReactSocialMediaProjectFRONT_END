@@ -45,7 +45,8 @@ class Nav extends Component {
   }
 
   _logout () {
-    this.props.dispatch(logout())
+    this.props.dispatch(logout());
+    this.props.history.push('/login');
   }
 
   _clearError () {

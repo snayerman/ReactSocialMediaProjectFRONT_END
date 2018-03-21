@@ -2,26 +2,42 @@ import React, {Component} from 'react'
 import {Link} from 'react-router'
 
 class List extends Component {
-  render () {
-    return (
-      <ul className='list-group'>
-        {this.props.items.map(function (authorLink) {
-          const newTo = {
-            pathname: '/friends',
-            query: {
-              authorLink
-            }
-          }
+   constructor(props) {
+      super(props);
+   }
+   
+   goToProfile(id) {
+      console.log(this);
+      this.props.history.push({
+         pathname: '/friends',
+         query: {
+            authorLink: authorLink.userName,
+            id: authorLink._id
+         }
+      })
+   }
 
-          return <li className='list-group-item'>
-            <Link to={newTo}>
-              {authorLink}</Link>
-          </li>
-        })
-}
-      </ul>
-    )
-  }
+   render () {
+      let that = this;
+      
+      return (
+         <ul className='list-group'>
+         {this.props.items.map(function (authorLink, idx) {
+            const newTo = {
+               pathname: `/friends`,
+               query: {
+                  authorLink: authorLink.userName
+               }
+            }
+
+            return <li key={idx} className='list-group-item'>
+               {/* <Link to={newTo}>{authorLink.userName}</Link> */}
+               <a href='#' onClick={() => that.goToProfile(authorLink._id)}>{authorLink.userName}</a>
+            </li>
+         })}
+         </ul>
+      )
+   }
 }
 
 export default List

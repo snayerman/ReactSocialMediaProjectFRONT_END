@@ -13,22 +13,46 @@ class Feed extends Component {
       filteredPosts: []
     }
 
-    axios.get(`https://api.myjson.com/bins/152rpb`)
-      .then(res => {
-        if (this.props.posts.length < 1) {
-          for (var i = 0; i < res.data.post.length; i++) {
-            const post = res.data.post[i]
-            this.props.dispatch(addNewsfeed(post))
-          }
-        }
-      })
+   //  axios.get(`https://api.myjson.com/bins/152rpb`)
+   //    .then(res => {
+   //      if (this.props.posts.length < 1) {
+   //        for (var i = 0; i < res.data.post.length; i++) {
+   //          const post = res.data.post[i]
+   //          this.props.dispatch(addNewsfeed(post))
+   //        }
+   //      }
+   //    })
 
     this.handleNewPost = this.handleNewPost.bind(this)
   }
 
-  handleNewPost (post) {
-    this.props.dispatch(addNewsfeed(post))
-  }
+   handleNewPost (post) {
+      var authOptions = {
+         method: 'POST',
+         url: 'http://localhost:3001/post',
+         data: {
+            author: post.author,
+            category: post.category,
+            content: post.content,
+            friend: post.friend
+         },
+         headers: {
+            'x-access-token': ''+localStorage.getItem("token"),
+            'Content-Type': 'application/json'
+         }
+      };
+
+      console.log(authOptions.data);
+      // this.props.dispatch(addFriend(friendName));
+      axios(authOptions)
+         .then(res => {
+            console.log("Sending post", post);
+            this.props.dispatch(addNewsfeed(post))
+         })
+         .catch(err => {
+            console.log("ASDFASDFADSFADSF", err);
+         })
+   }
 
   render () {
     const profileAuthor = this.props.author
@@ -36,7 +60,8 @@ class Feed extends Component {
 
     if (profileAuthor !== '-') {
       const authorFeed = this.props.posts.filter(function (e) {
-        return e.author === profileAuthor || e.friend === profileAuthor
+         // console.log("POST", e);
+        return e.author === profileAuthor || e.friend === profileAuthor /* || e.friend === 'Timeline' */
       })
 
       const post = authorFeed.map((post, index) => <Post key={index} value={post} />)
@@ -44,7 +69,7 @@ class Feed extends Component {
       return (
         <div className='feed'>
           {post}
-          <PostForm onSubmit={this.handleNewPost} />
+          <PostForm author={this.props.author} onSubmit={this.handleNewPost} />
         </div>
       )
     } else {
@@ -57,7 +82,7 @@ class Feed extends Component {
       return (
         <div className='feed'>
           {post}
-          <PostForm onSubmit={this.handleNewPost} />
+          <PostForm author={this.props.author} onSubmit={this.handleNewPost} />
         </div>
       )
     }

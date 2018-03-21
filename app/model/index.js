@@ -16,7 +16,9 @@ import {
   CHANGE_PASSWORD,
   REGISTER_USER,
   LOGIN_REQUEST,
-  LOGOUT
+  LOGOUT,
+  GET_SELF,
+  GET_ALL_USERS
 } from '../controller/constants'
 import auth from '../auth'
 
@@ -41,7 +43,7 @@ let initialState = {
   ListOfFriends: [
     'Timeline'
   ],
-  ListOfPeople: [
+  /* ListOfPeople: [
     'Costin Pirvu',
     'Alex Boyd',
     'Jessie Smith',
@@ -49,7 +51,8 @@ let initialState = {
     'Alli Dinapoli',
     'Alidod Ghazvini',
     'Andrew Cofano'
-  ]
+  ] */
+  ListOfPeople: []
 }
 
 // Takes care of changing the application state
@@ -63,14 +66,30 @@ function reducer (state = initialState, action) {
    case LOGIN_REQUEST:
       return {
          ...state,
-         formState: action.data,
+         // formState: action.data,
          loggedIn: true
       }
    case LOGOUT:
       localStorage.removeItem("token");
       return {
          ...state,
+         formState: {
+            username: '',
+            password: ''
+         },
          loggedIn: false
+      }
+   case GET_SELF:
+      return {
+         ...state,
+         ListOfFriends: ['Timeline'].concat(action.data.friends),
+         posts: action.data.posts,
+         name: action.data.userName
+      };
+   case GET_ALL_USERS:
+      return {
+         ...state,
+         ListOfPeople: action.data.users
       }
    case SET_AUTH:
       return {

@@ -16,7 +16,9 @@ import {
   DELETE_FRIEND,
   CHANGE_NAME,
   CHANGE_PASSWORD,
-  REGISTER_USER
+  REGISTER_USER,
+  GET_SELF,
+  GET_ALL_USERS
 } from './constants'
 
 export function registerUser (data) {
@@ -44,16 +46,15 @@ export function sendingRequest (sending) {
 
 export function loginRequest (data) {
    console.log("LOGGING IN!!!");
-   let user = {userName: data.username, password: data.password};
-
-   axios.post('http://localhost:3001/login', user).then(res => {
-      localStorage.setItem("token", res.data.token);
-      console.log("Logged in!");
-   }).catch(err => {
-      console.log("Login err!", err);
-   });
-
    return {type: LOGIN_REQUEST, data}
+}
+
+export function getSelf(data) {
+   return {type: GET_SELF, data};
+}
+
+export function getAllUsers(data) {
+   return {type: GET_ALL_USERS, data};
 }
 
 export function addNewsfeed (text) {

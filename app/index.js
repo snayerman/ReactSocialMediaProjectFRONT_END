@@ -64,7 +64,6 @@ class LoginFlow extends Component {
    }
 
    render () {
-      console.log("Props", this);
       return (
          <Provider store={store}>
             <Router history={browserHistory}>
@@ -75,7 +74,7 @@ class LoginFlow extends Component {
                   <Route path='/register' component={Register} />
                   <Route path='/dashboard' component={Dashboard} />
                   <Route path='/settings' component={Settings} />
-                  <Route path='/friends' component={FriendProfile} />
+                  <Route path='/friends' component={FriendProfile} store={store}/>
                   </Route>
                   <Route path='*' component={NotFound} />
                {/* </Route> */}

@@ -8,12 +8,13 @@ class PostForm extends Component {
   }
 
   handleSubmit (event) {
+     console.log("Making post!!", this);
     event.preventDefault()
     this.props.onSubmit({
       friend: this.friend.value,
       category: this.category.value,
       content: this.content.value,
-      author: 'Yeng Tan'
+      author: this.props.author
     })
     this.friend.value = this.props.ListOfFriends[0]
     this.category.value = this.props.categories[0]
