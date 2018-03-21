@@ -10,7 +10,7 @@ class Home extends Component {
     this.state = {loggedIn: this.props.loggedIn}
   }
 
-   componentDidMount() {      
+   componentDidMount() {
       if(localStorage.getItem("token") !== null) {
          var authOptions = {
             method: 'GET',
@@ -37,7 +37,7 @@ class Home extends Component {
                   }).catch(err => {
                      console.log(err);
                   })
-               
+
             })
             .catch(err => {
                console.log(err);
@@ -49,7 +49,7 @@ class Home extends Component {
     var imagestyle = {
       'max-width': '800px',
       'max-height': '800px'
-    }
+   }
     if (this.state.loggedIn === true) {
       return (
         <div className='main'>

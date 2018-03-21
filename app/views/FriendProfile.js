@@ -19,7 +19,7 @@ class FriendProfile extends Component {
       var authOptions = {
          method: 'POST',
          url: 'http://localhost:3001/friend',
-         params: {  
+         params: {
             id: id
          },
          headers: {
@@ -27,7 +27,7 @@ class FriendProfile extends Component {
             'Content-Type': 'application/json'
          }
       };
-      
+
       // this.props.dispatch(addFriend(friendName));
       axios(authOptions)
          .then(res => {
@@ -47,7 +47,7 @@ class FriendProfile extends Component {
       var authOptions = {
          method: 'DELETE',
          url: 'http://localhost:3001/friend',
-         params: {  
+         params: {
             id: id
          },
          headers: {
@@ -55,7 +55,7 @@ class FriendProfile extends Component {
             'Content-Type': 'application/json'
          }
       };
-      
+
       // this.props.dispatch(addFriend(friendName));
       axios(authOptions)
          .then(res => {
@@ -75,7 +75,7 @@ class FriendProfile extends Component {
       'maxHeight': '200px'
     }
 
-    var image = 'https://pbs.twimg.com/profile_images/1724449330/stick_man_by_minimoko94-d2zvfn8.png';
+    var image = 'http://images2.gazzettaobjects.it/includes2013/images/scribble_default_user.png';
 
     if (this.props.ListOfFriends.includes(friendName)) {
       return (

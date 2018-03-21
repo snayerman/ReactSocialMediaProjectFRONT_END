@@ -6,12 +6,15 @@ class App extends Component {
   render () {
     return (
       <div className='wrapper'>
+      <div className='background'>
+
         <Nav loggedIn={this.props.data.loggedIn}
           currentlySending={this.props.data.currentlySending}
           history={this.props.history}
           dispatch={this.props.dispatch}
           location={this.props.location} />
         {this.props.children}
+        </div>
       </div>
     )
   }

@@ -39,3 +39,12 @@ $wrapper-padding: 16px;
     width: 100%;
 		text-align: center;
 }
+
+.background {
+width: 100%;
+opacity: 20%;
+background-image: linear-gradient(rgba(0, 1, 255, 0.2), rgba(30, 255, 100, 0.3))
+}
+
+.filter-list {
+}
