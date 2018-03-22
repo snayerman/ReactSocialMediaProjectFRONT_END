@@ -26,6 +26,7 @@ class Search extends Component {
    //   console.log("BLACK", this.props.ListOfPeople);
     return (
       <div className='filter-list'>
+        <p> List of people!</p>
         <form>
           <fieldset className='form-group'>
             <input type='text' className='form-control form-control-lg' placeholder='Search' onChange={this.filterFriends} />

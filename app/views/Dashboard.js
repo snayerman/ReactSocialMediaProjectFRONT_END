@@ -15,7 +15,7 @@ class Dashboard extends Component {
     }
   }
 
-   componentDidMount() {      
+   componentDidMount() {
       if(localStorage.getItem("token") !== null) {
          var authOptions = {
             method: 'GET',
@@ -42,12 +42,12 @@ class Dashboard extends Component {
                   }).catch(err => {
                      console.log(err);
                   })
-               
+
             })
             .catch(err => {
                console.log(err);
             })
-         
+
          authOptions.url = 'http://localhost:3001/users';
 
          axios(authOptions)
@@ -62,6 +62,12 @@ class Dashboard extends Component {
    }
 
    render () {
+      var imagestyle = {
+        'maxWidth': '200px',
+        'maxHeight': '200px'
+      }
+      var image = 'http://images2.gazzettaobjects.it/includes2013/images/scribble_default_user.png';
+
       if(localStorage.getItem("token") === null)
          this.props.history.push('/login');
 
@@ -70,7 +76,7 @@ class Dashboard extends Component {
 
          <div className='lefty'>
             <h1>Welcome back! {this.state.name}</h1>
-            <ImageUpload />
+            <img src={image} style={imagestyle} />
          </div>
 
          <div className='righty'>

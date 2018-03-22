@@ -34,7 +34,7 @@ class Post extends Component {
   render () {
     const authorLink = this.props.value.author
     const friendLink = this.props.value.friend
-
+    console.log(this.props);
     var fromPathName = '/friends'
     var toPathName = '/friends'
 
@@ -55,11 +55,11 @@ class Post extends Component {
           <span className='content'>{this.props.value.content}</span>
           <Button onClick={() => this.deletePost()} bsStyle="danger" className="pull-right" style={{marginLeft: "25px", bottom: "8px", position: "relative"}}>Delete</Button>
           <span className='author'>
-            <Link to={{pathname: fromPathName, query: {authorLink}}}>
+            <Link to={{pathname: fromPathName, query: {authorLink, id: this.props.value._id}}}>
               {this.props.value.author}
             </Link>
         &nbsp;to&nbsp;
-        <Link to={{pathname: toPathName, query: {friendLink}}}>
+        <Link to={{pathname: toPathName, query: {friendLink, id: this.props.value._id}}}>
           {this.props.value.friend}
         </Link>
           </span>

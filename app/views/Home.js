@@ -46,6 +46,7 @@ class Home extends Component {
    }
 
   render () {
+
     var imagestyle = {
       'max-width': '800px',
       'max-height': '800px'

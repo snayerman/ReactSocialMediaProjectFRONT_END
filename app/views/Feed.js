@@ -74,12 +74,14 @@ class Feed extends Component {
         </div>
       )
     } else {
+
       const friendsFeed = this.props.posts.filter(function (e) {
-        return ListOfFriends.includes(e.author) || e.author === 'Yeng Tan' || (ListOfFriends.includes(e.friend) && !ListOfFriends.includes('Timeline'))
+        return ListOfFriends.includes(e.author) || e.author === 'sam' || (ListOfFriends.includes(e.friend) && !ListOfFriends.includes('Timeline'))
       })
 
       const post = friendsFeed.map((post, index) => <Post key={index} value={post} />)
-
+      //console.log(this.props.posts);
+      //console.log(post);
       return (
         <div className='feed'>
           {post}

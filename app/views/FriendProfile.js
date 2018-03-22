@@ -15,7 +15,7 @@ class FriendProfile extends Component {
       event.preventDefault()
       var friendName = this.props.location.query.authorLink || this.props.location.query.friendLink
       var id = this.props.location.query.id;
-
+      
       var authOptions = {
          method: 'POST',
          url: 'http://localhost:3001/friend',
@@ -43,6 +43,8 @@ class FriendProfile extends Component {
       event.preventDefault()
       var friendName = this.props.location.query.authorLink || this.props.location.query.friendLink
       var id = this.props.location.query.id;
+
+      console.log("DeleteFriend")
 
       var authOptions = {
          method: 'DELETE',

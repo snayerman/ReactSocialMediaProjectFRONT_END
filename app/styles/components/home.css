@@ -24,12 +24,13 @@ $wrapper-padding: 16px;
 }
 
 .lefty {
-	width: 70%;
+	width: 40%;
 	float:left;
+	padding-left: 100px;
 }
 
 .righty {
-	width: 30%;
+	width: 60%;
 	float:right;
 }
 
