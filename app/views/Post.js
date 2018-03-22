@@ -24,6 +24,9 @@ class Post extends Component {
         </div>
         <div className='formatRight'>
           <span className='content'>{this.props.value.content}</span>
+         <div>
+            <button className="btn btn-primary">Delete</button>
+         </div>
           <span className='author'>
             <Link to={{pathname: fromPathName, query: {authorLink}}}>
               {this.props.value.author}
