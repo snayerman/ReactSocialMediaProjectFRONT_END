@@ -15,9 +15,10 @@ class newsFeed extends Component {
     this.props.dispatch(addNewsfeed({post}))
   }
   render () {
-    const post = this.props.posts.map((post, index) =>
-      <Post key={index} value={post.post} />
-    )
+     let that = this;
+    const post = this.props.posts.map((post, index) => {
+      return <Post key={index} value={post.post} />
+     })
 
     return (
       <div className='feed'>

@@ -18,7 +18,8 @@ import {
   LOGIN_REQUEST,
   LOGOUT,
   GET_SELF,
-  GET_ALL_USERS
+  GET_ALL_USERS,
+  DELETE_POST
 } from '../controller/constants'
 import auth from '../auth'
 
@@ -120,6 +121,13 @@ function reducer (state = initialState, action) {
       return {
         ...state,
         posts: state.posts.concat(action.text)
+      }
+   case DELETE_POST:
+      return {
+         ...state,
+         posts: state.posts.filter(post => {
+            return post._id !== action.id;
+         })
       }
     case CHANGE_NAME:
       return {

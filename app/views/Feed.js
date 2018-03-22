@@ -64,7 +64,8 @@ class Feed extends Component {
         return e.author === profileAuthor || e.friend === profileAuthor /* || e.friend === 'Timeline' */
       })
 
-      const post = authorFeed.map((post, index) => <Post key={index} value={post} />)
+      let that = this;
+      const post = authorFeed.map((post, index) => <Post key={index} value={post} {...that.props} />)
 
       return (
         <div className='feed'>

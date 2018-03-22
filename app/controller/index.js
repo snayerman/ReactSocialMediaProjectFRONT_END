@@ -18,7 +18,8 @@ import {
   CHANGE_PASSWORD,
   REGISTER_USER,
   GET_SELF,
-  GET_ALL_USERS
+  GET_ALL_USERS,
+  DELETE_POST
 } from './constants'
 
 export function registerUser (data) {
@@ -79,6 +80,10 @@ export function changePassword (password) {
 
 export function logout () {
   return {type: LOGOUT}
+}
+
+export function deletePost (id) {
+   return {type: DELETE_POST, id}
 }
 
 export function registerRequest (data) {
